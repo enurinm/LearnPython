@@ -7,6 +7,33 @@ pygame.display.set_caption("rain")
 screen=pygame.display.set_mode((1000,600))
 clock=pygame.time.Clock()
 raindrop_spawn_time=0
+camerlyn_umbrella_img=pygame.image.load("img/Camerlyn_umbrella.png").convert()
+
+class Camerlyn:
+    """docstring for Camerlyn."""
+
+    def __init__(self):
+        super(Camerlyn, self).__init__()
+        self.x = 150
+        self.y = 450
+
+    def draw(self):
+        screen.blit(camerlyn_umbrella_img,(self.x, self.y))
+        pass
+
+    def hit_by(self, raindrop):
+        return pygame.Rect(self.x, self.y, 170, 192).collidepoint((raindrop.x,raindrop.y))
+        pass
+
+    def move(self):
+        pressed_keys=pygame.key.get_pressed()
+        if pressed_keys[K_RIGHT]:
+            self.x+=5
+            pass
+        if pressed_keys[K_LEFT]:
+            self.x-=5
+            pass
+
 
 class Raindrop:
     """make Raindrop."""
@@ -30,6 +57,7 @@ class Raindrop:
         pass
 
 raindrops = []
+camerlyn = Camerlyn()
 
 while 1:
     clock.tick(60)
@@ -41,12 +69,14 @@ while 1:
 
     raindrops.append(Raindrop())
     screen.fill((255,255,255))
+    camerlyn.draw()
+    camerlyn.move()
 
     i=0
     while i<len(raindrops):
         raindrops[i].move()
         raindrops[i].draw()
-        if raindrops[i].off_screen():
+        if raindrops[i].off_screen() or camerlyn.hit_by(raindrops[i]):
             del raindrops[i]
             i-=1
             pass
