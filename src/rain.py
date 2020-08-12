@@ -7,7 +7,7 @@ pygame.display.set_caption("rain")
 screen=pygame.display.set_mode((1000,600))
 clock=pygame.time.Clock()
 raindrop_spawn_time=0
-camerlyn_umbrella_img=pygame.image.load("img/Camerlyn_umbrella.png").convert()
+camerlyn_umbrella_img=pygame.image.load("./img/Camerlyn_umbrella.png").convert()
 
 class Camerlyn:
     """docstring for Camerlyn."""
