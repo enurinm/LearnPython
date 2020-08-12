@@ -27,6 +27,12 @@ class Camerlyn:
 
     def move(self):
         pressed_keys=pygame.key.get_pressed()
+        if self.y < 450:
+            self.y+=10
+            pass
+        if pressed_keys[K_UP]:
+            self.y-=20
+            pass
         if pressed_keys[K_RIGHT]:
             self.x+=5
             pass
