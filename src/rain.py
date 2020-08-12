@@ -7,7 +7,9 @@ pygame.display.set_caption("rain")
 screen=pygame.display.set_mode((1000,600))
 clock=pygame.time.Clock()
 raindrop_spawn_time=0
-camerlyn_umbrella_img=pygame.image.load("./img/Camerlyn_umbrella.png").convert()
+camerlyn_default=pygame.image.load("./img/Camerlyn_umbrella.png").convert()
+camerlyn_right=pygame.image.load("./img/Camerlyn_umbrella.png").convert()
+camerlyn_jump=pygame.image.load("./img/Camerlyn_umbrella.png").convert()
 
 class Camerlyn:
     """docstring for Camerlyn."""
@@ -18,7 +20,14 @@ class Camerlyn:
         self.y = 450
 
     def draw(self):
-        screen.blit(camerlyn_umbrella_img,(self.x, self.y))
+        pressed_keys=pygame.key.get_pressed()
+
+        if pressed_keys[K_RIGHT]:
+            screen.blit(camerlyn_right,(self.x, self.y))
+        elif pressed_keys[K_UP]:
+            screen.blit(camerlyn_jump,(self.x, self.y))
+        else:
+            screen.blit(camerlyn_default,(self.x, self.y))
         pass
 
     def hit_by(self, raindrop):
